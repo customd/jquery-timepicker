@@ -1,0 +1,250 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Timepicker - Documentation</title>
+
+<script type="text/javascript" src="../resources/javascripts/jquery-1.6.1.min.js"></script>
+<script type="text/javascript" src="../resources/javascripts/prettify.js"></script>
+<script type="text/javascript" src="../resources/javascripts/docs.js"></script>
+<script type="text/javascript" src="./files/jquery.timepicker.js"></script>
+
+<link rel="stylesheet" media="screen" href="../resources/stylesheets/prettify.css"/>
+<link rel="stylesheet" media="screen" href="../resources/stylesheets/docs.css"/>
+
+<style type="text/css">
+.demo p.output{margin-bottom:0;color:#2683BD;}
+#demo3 p.output{margin-top:0;}
+</style>
+
+</head>
+
+<body onload="prettyPrint();">
+	<!-- Documentation about a plugin -->
+	<h1>Timepicker</h1>
+	<author><a href="http://www.digitalfusion.co.nz/about/#samsehnert">Sam Sehnert</a></author>
+	<version>0.1.0 (<a href="changelog.html">changelog</a>)</version>
+	<!-- I WISH...<license>Dunno Yet...<a href="http://www.gnu.org/licenses/">GPL-3</a></license>-->
+
+	<p>This is a <a href="http://jquery.com/">jQuery</a> plugin which aims to create a standard, easy to use control which allows end users to enter times in a consistant and intuitive way.</p>
+		
+	<h2>Contents</h2>
+	<ul class="quicklink">
+		<li><a href="#demos">Demos</a></li>
+		<li><a href="#download">Download</a></li>
+		<li><a href="#config">Configuration</a></li>
+		<li><a href="#events">Events</a></li>
+		<li><a href="#methods">Methods</a></li>
+		<li><a href="#compatibility">Compatibility</a></li>
+	</ul>
+	
+	<h2>Getting Started</h2>
+
+	<p>The timepicker method can be used to create a timepicker widget in place of an existing input, which will submit the time value with its form, OR it can be used in a container element and the value can be extracted from it using the built in methods.</p>
+	<p>This allows a huge variety in implementation, and in the case of using it with a named input field, makes it easy to implement in any form.</p>
+	<code class="prettyprint lang-javascript">$(function(){
+    $('input[type="time"]').timepicker();
+}</code>
+	<p class="note after-code">The target element must be an input element, or a container that you want the input elements to be created in.</p>
+
+	<p>In the case of an input element, the minimum html you need to use this plugin is:</p>
+	<code class="prettyprint lang-html">&lt;input type="time" name="mytime" /&gt;</code>
+	<p class="note after-code">The input element can also be type="text".</p>
+	
+	<p>Or, you can simply specify a parent element, and the plugin will generate the required structure within that element.</p>
+	<p>The HTML structure that the plugin generates is as follows:</p>
+	<code class="prettyprint lang-html">&lt;div class="ui-timepicker ui-widget ui-widget-content"&gt;
+    &lt;input type="text" class="ui-timepicker-hour" size="2" /&gt;
+    &lt;input type="text" class="ui-timepicker-minute" size="2" /&gt;
+    &lt;input type="text" class="ui-timepicker-meridiem" size="2" /&gt;
+    &lt;input type="hidden" class="ui-timepicker-submittime" {name="original_name"} /&gt;
+&lt;/div&gt;</code>
+
+	<p>You can also use methods implemeneted by this plugin for formatting dates and times using the built in format method.</p>
+	<code class="prettyprint lang-javascript">$(function(){
+    $.timepicker.format( new Date(), 'H:i:s' ); // Outputs 08:00:00 at 8am.
+}</code>
+	
+	<h2><a name="demos">Demo</a></h2>
+	
+	<h3>Replacing an input</h3>
+	<p>Using the timepicker to replace an input field. The timepicker is using the value from the input field to pre-populate the fields.</p>
+
+	<div id="demo1" class="demo">
+		<script type="text/javascript">
+			$(function(){
+				$('#demo1 input[type="time"]').timepicker({'dateformat':'Hi'}).change(function(){
+					$('#demo1 p.output').text( 'Time: ' + $(this).val() + ' hrs' );
+				});
+			});
+			
+		</script>
+		<input type="time" value="08:00:00" name="the_time"/>
+		<p class="output"></p>
+	</div>
+	
+	<h4 class="demo">JavaScript</h4>
+	<code class="prettyprint lang-javascript">$(function(){
+    $('input[type="time"]').timepicker({
+        'dateformat' : 'Hi'
+    }).change(function(){
+        $('p.output').text( 'Time: ' + $(this).val() + ' hrs' );
+    });	
+}</code>
+	<h4 class="demo">HTML</h4>
+	<code class="prettyprint lang-html">&lt;input type="time" value="08:00:00" name="the_time"/&gt;</code>
+	
+	<h3>Inside a container</h3>
+	<p>Creating a timepicker inside a constraining element. Here, we're passing the default value into the function definition.</p>
+
+	<div id="demo2" class="demo">
+		<script type="text/javascript">
+			$(function(){
+				$('#timepicker').timepicker({
+					'dateformat'	: 'Hi',
+					'value'			: '16:00:00',
+					'onchange'		: function( time ){
+						$('#demo2 p.output').text( 'Time: ' + time + ' hrs' );
+					}
+				});
+			});
+			
+		</script>
+		<div id="timepicker"></div>
+		<p class="output"></p>
+	</div>
+	
+	<h4 class="demo">JavaScript</h4>
+	<code class="prettyprint lang-javascript">$(function(){
+    $('#timepicker').timepicker({
+        'dateformat'    : 'Hi',
+        'value'         : '16:00:00',
+        'onchange'      : function( time ){
+            $('p.output').text( 'Time: ' + time + ' hrs' );
+        }
+    });
+}</code>
+	
+	<h4 class="demo">HTML</h4>
+	<code class="prettyprint lang-html">&lt;div id="timepicker"&gt;&lt;/div&gt;</code>
+	
+	<!--
+	<h3><a name="demos">More Demos</a></h3>
+	<ul>
+		<li><a href="./urltodemo.html">A Demo</a></li>
+	</ul>
+	-->
+	
+	<h2><a name="config">Configuration Properties</a></h2>
+	<div class="table-holder">
+		<table>
+			<thead>
+				<tr><th>Property</th><th>Default</th><th>Description</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>dateformat</td><td>H:i:s</td><td>Defines the date format that the plugin will output. Use <a href="http://php.net/manual/en/function.date.php">PHP date format</a> masks.</td></tr>
+				<tr><td>value</td><td>null</td><td>Defines the default value of the timepicker. The time MUST be in HH:MM:SS format. If this value is left blank, we'll attempt to use the 'value' attribute of the target input element. If you've applied the plugin to a container, we will only use this value property.</td></tr>
+			</tbody>
+		</table>
+	</div>
+	
+	
+	<h3>Configuration</h3>
+	<p>Config data can be passed when you first initialise the object, as shown in the demos above. Additionally, you can use the 'option' method to apply or modify config properties.</p>
+	<code class="prettyprint lang-javascript">/* Modify the date format that the timepicker will output */
+$('input[type="time"]').timepicker('option','dateformat','h:i');
+
+/* Modify multiple options at one time */
+$('input[type="time"]').timepicker('option',{
+    'dateformat'    :'h:i',
+    'value'         :'12:30:00'
+})</code>
+	
+	<h2><a name="events">Events</a></h2>
+	<div class="table-holder">
+		<table>
+			<thead>
+				<tr><th>Event</th><th>Parameters</th><th>Details</th></tr>
+			</thead>
+			<tbody>
+				<tr><td><a href="#event1">onchange</a></td><td><em>String,Date<em></td><td>Called when the time is changed.<br />Recieves the currently entered time, formatted as a string using the defined datemask option. The second parameter is the raw date object.</td></tr>
+				<tr><td><a href="#event1">onsubmit</a></td><td><em>String<em></td><td>Called when the retrun key is pressed.<br />Recieves the currently entered time, formatted as a string using the defined datemask option.</td></tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<h3><a name="event1">Event Example</a></h3>
+	<p>More details about this specific event.</p>
+	<code class="prettyprint lang-javascript">/* Event example */</code>
+	
+	<h2><a name="methods">Methods</a></h2>
+	<div class="table-holder">
+		<table>
+			<thead>
+				<tr><th>Method</th><th>Parameters</th><th>Returns</th><th>Description</th></tr>
+			</thead>
+			<tbody>
+				<tr><td>.timepicker('option')</td><td><em>Object</em><br /><em>String,String</em></td><td><em>jQeury</em></td><td>Takes a config object, or config string/value and applies the configuration option to the timepicker.</td></tr>
+				<tr><td>.timepicker('version')</td><td><em>void</em></td><td><em>String</em></td><td>Returns the version number of the currently installed timepicker.</td></tr>
+				<tr><td>.timepicker('destroy')</td><td><em>void</em></td><td><em>jQuery</em></td><td>Removes the timepicker from the targeted element, and returns the element to its pre-initialisation state.</td></tr>
+				<tr><td><a href="#timepicker_format">$.timepicker.format</a></td><td><em>Date,String</em></td><td><em>String</em></td><td>Takes a date object, and returns a formatted time string, according to the passed mask.<br />Only supports time formatting.</td></tr>
+			</tbody>
+		</table>
+	</div>
+	
+	<h3><a name="timepicker_format">$.timepicker.format</a></h3>
+	<p>The timepicker format method allows you to use the time formatting capability of the timepicker plugin. The format method will only allow you to output time formats.</p>
+	<p>Use the <a href="">php date</a> codes to create your date mask. Be aware when writing your date mask, that any masked characters will need to be double backslashed in the JavaScript source, as demonstrated below.</p>
+	
+	<div id="demo3" class="demo">
+		<script type="text/javascript">
+			$(function(){
+				setInterval(function(){
+					var time = $.timepicker.format( new Date(), 'g\\hims\\s a' );
+					$('#demo3 p.output').text( time );
+				}, 1000 );
+			});
+		</script>
+		<p class="output"></p>
+	</div>
+	<code class="prettyprint lang-javascript">/* Method example */
+$(function(){
+    setInterval(function(){
+        var time = $.timepicker.format( new Date(), 'g\\hims\\s a' );
+        $('#demo3 p.output').text( time );
+    }, 1000 );
+});</code>
+	
+	<!-- This part is only valid for ONLINE documentation, not downloadable docs.
+	<h2>Download</h2>
+	<h3>Packaged Release</h3>
+	<p>Contains all files required for this plugin, including documentation, addons and external resources.</p>
+	
+	<a href="jquery.plugin.zip">jquery.plugin.zip</a>
+	
+	<h3>Individual Downloads</h3>
+	<p>Download and place the required files and any optional files in a directory that is accessable by your web server.</p>
+	<h4>Required</h4>
+	<ul>
+		<li><a href="http://docs.jquery.com/Downloading_jQuery#Download_jQuery">jQuery</a> (1.0.0 or higher)</li>
+		<li><a href="jquery.plugin.min.zip">jquery.plugin.min.zip</a> (&#8734;kb, Minified for production. Place this file on your server.)</li>
+	</ul>
+	
+	<h4>Optional/Add-Ons</h4>
+	<ul>
+		<li><a href="jquery.plugin-1.0.0.js">jquery.plugin-1.0.0.js</a> (&#8734;kb, Development version)</li>
+		<li><a href="jquery.optionalplugin.js">jquery.optionalplugin.js</a> (&#8734;kb, <a href="#linktodocumentation">Optional plugin name</a>)</li>
+	</ul>
+	-->
+	
+	<h2><a name="compatibility">Compatibility</a></h2>
+	<p>This plugin has been tested, and verified working in the following browsers with JavaScript enabled.</p>
+	<ul>
+		<li>Safari 4+</li>
+		<li>Chrome 9+</li>
+		<li>Internet Explorer 8+</li>
+	</ul>
+	
+	<a href="http://docs.jquery.com/Browser_Compatibility">jQuery Browser Compatibility</a>
+</body>
+
+</html>
