@@ -8,7 +8,7 @@
 	// The name of your plugin. This is used to namespace your
 	// plugin methods, object data, and registerd events.
 	var plugin_name = 'timepicker';
-	var plugin_version = '0.1.0';
+	var plugin_version = '1.0.0';
 	
 	// Set up the plugin defaults.
 	// These will be stored in $this.data(plugin_name).settings,
