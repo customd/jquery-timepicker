@@ -1,0 +1,39 @@
+{
+	"name"			: "df-timepicker",
+	"version"		: "1.0.0",
+	"title"			: "jQuery Timepicker",
+	"author"		: {
+		"name"	: "Team DF",
+		"email"	: "plugins@teamdf.com",
+		"url"	: "http://teamdf.com/"
+	},
+	"maintainers"	: [
+		{
+			"name"	: "Sam Sehnert",
+			"email"	: "sam@teamdf.com"
+		}
+	],
+	"description"	: "This plugin aims to create a standard, easy-to-use control which allows end users to enter times in a consistant and intuitive way. It converts a standard HTML input element into a user friendly time entry widget, and allows you to format times as you require.",
+	"keywords"		: [
+		"time",
+		"entry",
+		"form",
+		"input",
+		"format"
+	],
+	"homepage"		: "https://github.com/teamdf/jquery-timepicker/",
+	"docs"			: "https://github.com/teamdf/jquery-timepicker/tree/master/docs",
+	"demo"			: "https://github.com/teamdf/jquery-timepicker/",
+	"files"			: [
+		"jquery.timepicker.js"
+	],
+	"dependancies"	: {
+		"jquery" : ">1.4.0"
+	},
+	"licenses"		: [
+		{
+		    "type": "GPLv3",
+		    "url": "http://www.gnu.org/licenses/gpl-3.0.html"
+		}
+	]
+}
