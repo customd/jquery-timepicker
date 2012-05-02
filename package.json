@@ -21,9 +21,9 @@
 		"input",
 		"format"
 	],
-	"homepage"		: "https://github.com/teamdf/jquery-timepicker/",
+	"homepage"		: "http://teamdf.com/jquery-plugins/timepicker/",
 	"docs"			: "https://github.com/teamdf/jquery-timepicker/tree/master/docs",
-	"demo"			: "https://github.com/teamdf/jquery-timepicker/",
+	"demo"			: "http://teamdf.com/jquery-plugins/timepicker/",
 	"files"			: [
 		"jquery.timepicker.js"
 	],
